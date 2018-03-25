@@ -3,11 +3,23 @@ const router = express.Router();
 const database = require('./database');
 
 router.get('/', function (req, res) {
-    database.find()
-        .then(function (doc) {
-            res.send(doc);
-        });
+    database.find(
+        function (err, users) {
+            if (err) return res.status(500).send(err);
+            return res.status(200).send(users);
+        }
+    );
 });
+
+router.get('/user/:id', function (req, res) {
+    database.findById(
+        req.params.id,
+        function (err, user) {
+            if (err) return res.status(500).send(err);
+            return res.status(200).send(user);
+        }
+    )
+})
 
 router.post('/user', function (req, res) {
     const newUser = {
@@ -16,7 +28,12 @@ router.post('/user', function (req, res) {
     };
 
     const data = new database(newUser);
-    data.save();
+    data.save(
+        function (err) {
+            if (err) return res.status(500).send(err);
+            return res.status(200).send(data);
+        }
+    );
 })
 
 router.put('/user/:id', function (req, res) {
