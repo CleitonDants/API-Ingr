@@ -6,26 +6,37 @@ const Schema = mongoose.Schema;
 const userDataSchema = new Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     email: {
         type: String,
-        require: true
+        required: true
     },
     age: {
         type: Number,
-        require: true
+        required: true
     },
     tickets: [{
-        eventName: String,
-        local: String,
-        date: String,
-        usdPrice: Number,
+        eventName: {
+            type: String,
+            required: true
+        },
+        local: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: String,
+            required: true,
+            default: "Not defined yet"
+        },
+        usdPrice: {
+            type: Number,
+            required: true
+        }
     }]
 }, {
     collection: 'ingr_users'
 });
 
-const user = mongoose.model('User', userDataSchema);
-
-module.exports = user;
+module.exports = mongoose.model('User', userDataSchema);
