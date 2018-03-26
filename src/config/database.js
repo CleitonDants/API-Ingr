@@ -8,7 +8,20 @@ const userDataSchema = new Schema({
         type: String,
         require: true
     },
-    email: String
+    email: {
+        type: String,
+        require: true
+    },
+    age: {
+        type: Number,
+        require: true
+    },
+    tickets: [{
+        eventName: String,
+        local: String,
+        date: String,
+        usdPrice: Number,
+    }]
 }, {
     collection: 'ingr_users'
 });

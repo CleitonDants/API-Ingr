@@ -22,16 +22,19 @@ router.get('/user/:id', function (req, res) {
 })
 
 router.post('/user', function (req, res) {
+
     const newUser = {
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        age: req.body.age,
+        tickets: req.body.tickets
     };
 
-    const data = new database(newUser);
-    data.save(
+    const userModeled = new database(newUser);
+    userModeled.save(
         function (err) {
             if (err) return res.status(500).send(err);
-            return res.status(200).send(data);
+            return res.status(200).send(userModeled);
         }
     );
 })

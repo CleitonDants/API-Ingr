@@ -8,7 +8,7 @@ server.use(bodyParser.urlencoded({
     extended: true
 }));
 server.use(bodyParser.json());
-server.use('/api', routes);
+server.use('/api/v1', routes);
 
 server.listen(port,
     () => console.log(`Listening on port ${port}`));
