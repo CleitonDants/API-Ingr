@@ -4,19 +4,21 @@
   "description": "",
   "main": "src/loader.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "style": "eslint --init"
   },
   "keywords": [],
   "author": "Cleiton Dantas",
   "license": "ISC",
   "devDependencies": {
-    "body-parser": "^1.18.2",
-    "chai": "^4.1.2",
-    "express": "^4.16.3",
-    "mongoose": "^5.0.11",
-    "mysql": "^2.15.0",
-    "nodemon": "^1.17.2",
-    "sinon": "^4.4.8"
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "nodemon": "^1.17.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "mongoose": "^5.0.11",
+    "express": "^4.16.3"
+  }
 }
