@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
     );
 });
 
-router.get('/user/:id', function (req, res) {
+router.get('/:id', function (req, res) {
     database.findById(
         req.params.id,
         function (err, user) {
@@ -21,7 +21,7 @@ router.get('/user/:id', function (req, res) {
     )
 })
 
-router.post('/user', function (req, res) {
+router.post('/', function (req, res) {
 
     const newUser = {
         name: req.body.name,
@@ -39,7 +39,7 @@ router.post('/user', function (req, res) {
     );
 })
 
-router.put('/user/:id', function (req, res) {
+router.put('/:id', function (req, res) {
     const query = req.params.id;
     const newData = req.body;
 
@@ -56,7 +56,7 @@ router.put('/user/:id', function (req, res) {
 
 });
 
-router.delete('/user/:id', function (req, res) {
+router.delete('/:id', function (req, res) {
     database.findByIdAndRemove(
         req.params.id,
         function (err, user) {
