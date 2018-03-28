@@ -1,6 +1,7 @@
 const express = require('express');
 const Database = require('./database');
 const mongoose = require('mongoose');
+const dotNotation = require('mongo-dot-notation');
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   Database.find(
     {
-      'tickets._id': Id(req.params.id)
+      'tickets._id': Id(req.params.id),
     },
     (err, user) => {
       if (err) return res.status(500).send(err);
@@ -31,17 +32,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  const newTicket = {
-    _id: new Id(),
-    eventName: req.body.eventName,
-    local: req.body.local,
-    date: req.body.date,
-    usdPrice: req.body.usdPrice,
-  };
+  const instructions = dotNotation.flatten({ tickets: dotNotation.$set(req.body) });
 
   Database.findOneAndUpdate(
     { 'tickets._id': Id(req.params.id) },
-    { 'tickets.$': newTicket }, {
+    instructions, {
       new: true,
     },
     (err, user) => {
