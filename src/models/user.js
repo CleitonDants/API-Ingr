@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/ingr');
-
 const userDataSchema = new mongoose.Schema({
   name: {
     type: String,

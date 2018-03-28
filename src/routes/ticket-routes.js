@@ -1,5 +1,5 @@
 const express = require('express');
-const Database = require('./database');
+const userModel = require('../models/user');
 const mongoose = require('mongoose');
 const dotNotation = require('mongo-dot-notation');
 
@@ -7,8 +7,9 @@ const router = express.Router();
 
 const { ObjectId: Id } = mongoose.Types;
 
+// GET all tickets
 router.get('/', (req, res) => {
-  Database.find(
+  userModel.find(
     {}, {
       tickets: 1,
     },
@@ -19,8 +20,9 @@ router.get('/', (req, res) => {
   );
 });
 
+// GET ticket by id
 router.get('/:id', (req, res) => {
-  Database.find(
+  userModel.find(
     {
       'tickets._id': Id(req.params.id),
     },
@@ -32,7 +34,8 @@ router.get('/:id', (req, res) => {
 });
 
 
-// UPDATE a ticket in mongoDB is not so trivial how it seems. Because it's into an embed array. 
+// UPDATE a ticket by its id
+// UPDATE a subdocument in mongoDB is not so trivial how it seems if it's inside an embed array. 
 // if you sends a PUT verb without some field, then the ticket will be without the field at the end.
 // Require a solution more elegant.
 router.put('/:id', (req, res) => {
@@ -42,7 +45,7 @@ router.put('/:id', (req, res) => {
   if (req.body.date) tickets.date = req.body.date;
   if (req.body.usdPrice) tickets.usdPrice = req.body.usdPrice;
 
-  Database.updateOne(
+  userModel.updateOne(
     { 'tickets._id': Id(req.params.id) },
     dotNotation.flatten(tickets), {
       new: true,
@@ -54,16 +57,16 @@ router.put('/:id', (req, res) => {
   );
 });
 
+//REMOVE a ticket by ID
 router.delete('/:id', (req, res) => {
-
-  Database.findOneAndUpdate(
-    { 'tickets._id': Id(req.params.id) },{
+  userModel.findOneAndUpdate(
+    { 'tickets._id': Id(req.params.id) }, {
       $pull: {
         tickets: {
           _id: Id(req.params.id)
         }
       }
-    },{
+    }, {
       new: true
     },
     (err, user) => {
@@ -78,4 +81,30 @@ router.delete('/:id', (req, res) => {
     },
   );
 });
+
+//INSERT ticket by given Id user
+router.put('/:id', (req, res) => {
+  const newTicket = {
+    _id: new Id(),
+    eventName: req.body.eventName,
+    local: req.body.local,
+    date: req.body.date,
+    usdPrice: req.body.usdPrice,
+  };
+
+  userModel.findByIdAndUpdate(
+    req.params.id, {
+      $push: {
+        tickets: newTicket,
+      },
+    }, {
+      new: true,
+    },
+    (err, user) => {
+      if (err) return res.status(500).send(err);
+      return res.send(user);
+    },
+  );
+});
+
 module.exports = router;

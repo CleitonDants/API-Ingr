@@ -2,7 +2,7 @@
   "name": "api-ingr",
   "version": "1.0.0",
   "description": "",
-  "main": "src/loader.js",
+  "main": "src/server.js",
   "scripts": {
     "dev": "nodemon",
     "style": "eslint --init"

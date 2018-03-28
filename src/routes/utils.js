@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+
+const { ObjectId: Id } = mongoose.Types;
+
 function ticketsHandler(tickets) {
   const newArray = [];
   let item;
