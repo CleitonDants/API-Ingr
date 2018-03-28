@@ -1,5 +1,5 @@
 const express = require('express');
-const Database = require('./Database');
+const Database = require('./database');
 const mongoose = require('mongoose');
 
 const router = express.Router();
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   Database.find(
     {
-      'tickets._id': req.params.id,
+      'tickets._id': Id(req.params.id)
     },
     (err, user) => {
       if (err) return res.status(500).send(err);
@@ -39,12 +39,9 @@ router.put('/:id', (req, res) => {
     usdPrice: req.body.usdPrice,
   };
 
-  Database.findByIdAndUpdate(
-    req.params.id, {
-      $push: {
-        tickets: newTicket,
-      },
-    }, {
+  Database.findOneAndUpdate(
+    { 'tickets._id': Id(req.params.id) },
+    { 'tickets.$': newTicket }, {
       new: true,
     },
     (err, user) => {
@@ -53,5 +50,4 @@ router.put('/:id', (req, res) => {
     },
   );
 });
-
 module.exports = router;

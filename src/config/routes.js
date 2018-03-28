@@ -1,7 +1,10 @@
 const express = require('express');
-const Database = require('./Database');
+const Database = require('./database');
+const mongoose = require('mongoose');
 
 const router = express.Router();
+
+const { ObjectId: Id } = mongoose.Types;
 
 router.get('/', (req, res) => {
   Database.find((err, users) => {
@@ -66,4 +69,29 @@ router.delete('/:id', (req, res) => {
     },
   );
 });
+
+router.put('/:id', (req, res) => {
+  const newTicket = {
+    _id: new Id(),
+    eventName: req.body.eventName,
+    local: req.body.local,
+    date: req.body.date,
+    usdPrice: req.body.usdPrice,
+  };
+
+  Database.findByIdAndUpdate(
+    req.params.id, {
+      $push: {
+        tickets: newTicket,
+      },
+    }, {
+      new: true,
+    },
+    (err, user) => {
+      if (err) return res.status(500).send(err);
+      return res.send(user);
+    },
+  );
+});
+
 module.exports = router;
