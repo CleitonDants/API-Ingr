@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
 
 
 // UPDATE a ticket by its id
-// UPDATE a subdocument in mongoDB is not so trivial how it seems if it's inside an embed array. 
+// UPDATE a subdocument in mongoDB is not so trivial how it seems if it's inside an embed array.
 // if you sends a PUT verb without some field, then the ticket will be without the field at the end.
 // Require a solution more elegant.
 router.put('/:id', (req, res) => {
@@ -57,17 +57,17 @@ router.put('/:id', (req, res) => {
   );
 });
 
-//REMOVE a ticket by ID
+// REMOVE a ticket by ID
 router.delete('/:id', (req, res) => {
   userModel.findOneAndUpdate(
     { 'tickets._id': Id(req.params.id) }, {
       $pull: {
         tickets: {
-          _id: Id(req.params.id)
-        }
-      }
+          _id: Id(req.params.id),
+        },
+      },
     }, {
-      new: true
+      new: true,
     },
     (err, user) => {
       if (err) return res.status(500).send(err);
@@ -78,31 +78,6 @@ router.delete('/:id', (req, res) => {
         userNow: user,
       };
       return res.status(200).send(response);
-    },
-  );
-});
-
-//INSERT ticket by given Id user
-router.put('/:id', (req, res) => {
-  const newTicket = {
-    _id: new Id(),
-    eventName: req.body.eventName,
-    local: req.body.local,
-    date: req.body.date,
-    usdPrice: req.body.usdPrice,
-  };
-
-  userModel.findByIdAndUpdate(
-    req.params.id, {
-      $push: {
-        tickets: newTicket,
-      },
-    }, {
-      new: true,
-    },
-    (err, user) => {
-      if (err) return res.status(500).send(err);
-      return res.send(user);
     },
   );
 });

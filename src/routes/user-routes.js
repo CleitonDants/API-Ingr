@@ -1,22 +1,22 @@
 const express = require('express');
-const userModel = require('../models/user');
+const UserModel = require('../models/user');
 const mongoose = require('mongoose');
 const { ticketsHandler } = require('./utils');
 
 const router = express.Router();
 const { ObjectId: Id } = mongoose.Types;
 
-//GET all users
+// GET all users
 router.get('/', (req, res) => {
-  userModel.find((err, users) => {
+  UserModel.find((err, users) => {
     if (err) return res.status(500).send(err);
     return res.status(200).send(users);
   });
 });
 
-//GET user by id
+// GET user by id
 router.get('/:id', (req, res) => {
-  userModel.findById(
+  UserModel.findById(
     req.params.id,
     (err, user) => {
       if (err) return res.status(500).send(err);
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
   );
 });
 
-//INSERT user
+// INSERT user
 router.post('/', (req, res) => {
   const newUser = {
     name: req.body.name,
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
     tickets: ticketsHandler(req.body.tickets),
   };
 
-  const userModeled = new userModel(newUser);
+  const userModeled = new UserModel(newUser);
 
   userModeled.save((err) => {
     if (err) return res.status(500).send(err);
@@ -42,12 +42,12 @@ router.post('/', (req, res) => {
   });
 });
 
-//UPDATE user by given Id
+// UPDATE user by given Id
 router.put('/:id', (req, res) => {
   const query = req.params.id;
   const newData = req.body;
 
-  userModel.findByIdAndUpdate(
+  UserModel.findByIdAndUpdate(
     query,
     newData, {
       new: true,
@@ -59,9 +59,9 @@ router.put('/:id', (req, res) => {
   );
 });
 
-//REMOVE user by given Id
+// REMOVE user by given Id
 router.delete('/:id', (req, res) => {
-  userModel.findByIdAndRemove(
+  UserModel.findByIdAndRemove(
     req.params.id,
     (err, user) => {
       if (err) return res.status(500).send(err);
@@ -71,6 +71,31 @@ router.delete('/:id', (req, res) => {
         user,
       };
       return res.status(200).send(response);
+    },
+  );
+});
+
+// INSERT ticket by given Id user
+router.put('/:id', (req, res) => {
+  const newTicket = {
+    _id: new Id(),
+    eventName: req.body.eventName,
+    local: req.body.local,
+    date: req.body.date,
+    usdPrice: req.body.usdPrice,
+  };
+
+  UserModel.findByIdAndUpdate(
+    req.params.id, {
+      $push: {
+        tickets: newTicket,
+      },
+    }, {
+      new: true,
+    },
+    (err, user) => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send(user);
     },
   );
 });
