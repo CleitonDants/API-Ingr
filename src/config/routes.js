@@ -1,9 +1,9 @@
 const express = require('express');
 const Database = require('./database');
 const mongoose = require('mongoose');
+const { ticketsHandler } = require('./utils');
 
 const router = express.Router();
-
 const { ObjectId: Id } = mongoose.Types;
 
 router.get('/', (req, res) => {
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     name: req.body.name,
     email: req.body.email,
     age: req.body.age,
-    tickets: req.body.tickets,
+    tickets: ticketsHandler(req.body.tickets),
   };
 
   const userModeled = new Database(newUser);

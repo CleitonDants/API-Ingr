@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
     {}, {
       tickets: 1,
     },
-    (err, users) => {
+    (err, tickets) => {
       if (err) return res.status(500).send(err);
-      return res.status(200).send(users);
+      return res.status(200).send(tickets);
     },
   );
 });
@@ -24,24 +24,57 @@ router.get('/:id', (req, res) => {
     {
       'tickets._id': Id(req.params.id),
     },
-    (err, user) => {
+    (err, ticket) => {
       if (err) return res.status(500).send(err);
-      return res.status(200).send(user);
+      return res.status(200).send(ticket);
     },
   );
 });
 
+
+// UPDATE a ticket in mongoDB is not so trivial how it seems. Because it's into an embed array. 
+// if you sends a PUT verb without some field, then the ticket will be without the field at the end.
+// Require a solution more elegant.
 router.put('/:id', (req, res) => {
-  const instructions = dotNotation.flatten({ tickets: dotNotation.$set(req.body) });
+  const tickets = {};
+  if (req.body.eventName) tickets.eventName = req.body.eventName;
+  if (req.body.local) tickets.local = req.body.local;
+  if (req.body.date) tickets.date = req.body.date;
+  if (req.body.usdPrice) tickets.usdPrice = req.body.usdPrice;
+
+  Database.updateOne(
+    { 'tickets._id': Id(req.params.id) },
+    dotNotation.flatten(tickets), {
+      new: true,
+    },
+    (err, ticket) => {
+      if (err) return res.status(500).send(err);
+      return res.send(ticket);
+    },
+  );
+});
+
+router.delete('/:id', (req, res) => {
 
   Database.findOneAndUpdate(
-    { 'tickets._id': Id(req.params.id) },
-    instructions, {
-      new: true,
+    { 'tickets._id': Id(req.params.id) },{
+      $pull: {
+        tickets: {
+          _id: Id(req.params.id)
+        }
+      }
+    },{
+      new: true
     },
     (err, user) => {
       if (err) return res.status(500).send(err);
-      return res.send(user);
+      if (!user) return res.status(404).send('Ticket not found');
+
+      const response = {
+        message: 'Successfully deleted',
+        userNow: user,
+      };
+      return res.status(200).send(response);
     },
   );
 });
