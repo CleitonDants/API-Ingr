@@ -21,6 +21,7 @@ server.get('/api/v1/', (req, res) => res.send('Welcome to the Ingr API! We recom
 server.use('/api/v1/user', userRouter);
 server.use('/api/v1/ticket', ticketRouter);
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+// Conditional for the server doesn't staying on all the time when the tests are running
+if (require.main === module) server.listen(port, () => console.log(`Listening on port ${port}`));
 
 module.exports = server;

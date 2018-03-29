@@ -1,0 +1,19 @@
+{
+  "tickets": [
+    {
+      "eventName": "Around the world",
+      "local": "Estação Space-X, California, Estados Unidos",
+      "date": "11/09/2022",
+      "usdPrice": 5000
+    },
+    {
+      "eventName": "From Jupiter to Netune",
+      "local": "Estação Space-X, California, Estados Unidos",
+      "date": "20/11/2040",
+      "usdPrice": 500000
+    }
+  ],
+  "name": "Pedrin",
+  "email": "pedrin@gmail.com",
+  "age": 19
+}

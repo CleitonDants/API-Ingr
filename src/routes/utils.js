@@ -5,6 +5,8 @@ const { ObjectId: Id } = mongoose.Types;
 function ticketsHandler(tickets) {
   const newArray = [];
   let item;
+  
+  if(!tickets || tickets.length < 2) return tickets;
 
   for (const ticket of tickets) {
     item = {

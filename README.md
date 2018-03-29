@@ -2,7 +2,7 @@
 An API RESTFul that serves **users data and tickets** bought by them.
 
 ## Code style
-Using code style ESLint.
+Using **Airbnb style code** by ESLint.
 <!-- [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard) -->
  
 ## Screenshots
@@ -11,11 +11,11 @@ Include logo/demo screenshot etc.
 ## Tech/framework used
 
 <b>Built with</b>
-- [Node.js](https://electron.atom.io)
-- [Express]
-- [Body-parser]
-- [MongoDB]
-- [Mongoose]
+- Node.js
+- Express
+- Body-parser
+- MongoDB
+- Mongoose
 
 ## Features
 - GET all data users

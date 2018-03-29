@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
     },
     (err, user) => {
       if (err) return res.status(500).send(err);
-      return res.send(user);
+      return res.status(200).send(user);
     },
   );
 });
