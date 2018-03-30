@@ -78,7 +78,7 @@ All fields are **required** excepts "tickets".
 Example:
 ```
 {
-	"name": "Elon Musk",
+  "name": "Elon Musk",
   "age": 46,
   "email": "elon@tesla.com"
 }
@@ -124,6 +124,6 @@ npm run test
 - Switch type of "date" from String to Date.
 
 ## License
-No restrictions.
+The MIT License (MIT)
 
-© [Cleiton Dantas](https://github.com/cleitondants)
+Copyright © [Cleiton Dantas](https://github.com/cleitondants) [2018]
