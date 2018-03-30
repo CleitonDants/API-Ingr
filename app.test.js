@@ -4,7 +4,6 @@ const app = require('../app');
 const docJson = require('./docJson');
 const mongoose = require('mongoose');
 
-//to store the ID's new user
 let idUser = '';
 
 function dropDB() {

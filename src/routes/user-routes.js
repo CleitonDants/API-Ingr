@@ -66,17 +66,20 @@ router.delete('/:id', (req, res) => {
     (err, user) => {
       if (err) return res.status(500).send(err);
 
-      const response = {
-        message: 'Successfully deleted',
-        user,
-      };
+      let response = 'User not found';     
+      if(user) {
+        response = {
+          user,
+          message: 'Successfully deleted'
+        };
+      }
       return res.status(200).send(response);
     },
   );
 });
 
 // INSERT ticket by given Id user
-router.put('/:id', (req, res) => {
+router.put('/ticket/:id', (req, res) => {
   const newTicket = {
     _id: new Id(),
     eventName: req.body.eventName,

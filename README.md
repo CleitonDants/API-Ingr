@@ -2,21 +2,32 @@
 An API RESTFul that serves **users data and tickets** bought by them.
 
 ## Code style
-Using **Airbnb style code** by ESLint.
-<!-- [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard) -->
+ [![js-airbnb-style](https://camo.githubusercontent.com/9829cb01a7f7b1bc7ad5e52f5c5451cd97983189/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64652532307374796c652d416972626e622d6666356135662e737667)](https://github.com/airbnb/javascript)
  
-## Screenshots
-Include logo/demo screenshot etc.
-
+Using Airbnb style code.
+ 
 ## Tech/framework used
 
-<b>Built with</b>
+<b>Built with:</b>
 - Node.js
 - Express
 - Body-parser
 - MongoDB
 - Mongoose
 
+<b>Test:</b>
+- Tape
+- Supertest
+- Tap Spec
+
+<b>Style:</b>
+- ESLint
+
+<b>DevTool</b>
+- Nodemon
+
+<b>Util</b>
+- Mongo-Dot-Notation
 ## Features
 - GET all data users
 - POST user
@@ -24,25 +35,84 @@ Include logo/demo screenshot etc.
 - POST tickets to an user
 - GET, PUT and DELETE ticket by ID
 
-## Code Example
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
 ## Installation
-npm install
-npm run production
-## API Reference
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+    npm install
+    npm run ingr
+    
+## API Reference
+#### By [Postman](https://www.getpostman.com/):
+The port may variate.
+#### USERS `` api/v1/user/``
+##### [GET] All Users:
+``http://localhost:7000/api/v1/user/``
+##### [GET] Get an user by id:
+``http://localhost:7000/api/v1/user/:id``
+##### [POST] An user:
+
+``http://localhost:7000/api/v1/user/``
+
+###### Insertion format:
+All fields are **required** excepts "tickets".
+````
+{
+  "name": <string>,
+  "email": <string>,
+  "age": <int>,
+  "tickets": <Array>
+}
+````
+##### [PUT] Update one or more fields by an user Id
+
+``http://localhost:7000/api/v1/user/:id``
+
+Example:
+```
+{
+	"name": "Elon Musk",
+    "age": 46,
+    "email": "elon@tesla.com"
+}
+```
+##### [Delete] By an user id
+``http://localhost:7000/api/v1/user/:id``
+
+#### Tickets ``api/v1/ticket/``
+
+##### [GET] All tickets:
+``http://localhost:7000/api/v1/ticket/``
+##### [GET] Get a ticket by id:
+``http://localhost:7000/api/v1/ticket/:id``
+##### [POST] Insert a ticket by given user Id:
+
+``http://localhost:7000/api/v1/ticket/:id``
+
+###### Insertion format:
+````
+{
+  "eventName": <string>,
+  "local": <string>,
+  "date": <string>,
+  "price": <float>
+}
+````
+##### [DELETE] By a ticket id:
+``http://localhost:7000/api/v1/ticket/:id``
 
 ## Tests
-Describe and show how to run the tests with code examples.
-
-## How to use?
-If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
-
-#### Anything else that seems useful
+Tests by the frameworks Tape and Supertest 
+```
+npm run test
+```
+## Improvements required
+- Implement an scheme in "tickets" instead an array of tickets;
+- Refactor ticket update method;
+- More unit tests of user;
+- Unit tests for tickets;
+- More validations;
+- Switch type of "date" from String to Date.
 
 ## License
-A short snippet describing the license (MIT, Apache etc)
+No restrictions.
 
-MIT © [Cleiton Dantas]()
+© [Cleiton Dantas](https://github.com/cleitondants)

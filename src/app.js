@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/ingr');
 
 const server = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 7000;
 
 server.use(bodyParser.urlencoded({
   extended: true,

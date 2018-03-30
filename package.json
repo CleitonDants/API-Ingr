@@ -1,14 +1,22 @@
 {
   "name": "api-ingr",
   "version": "1.0.0",
-  "description": "",
+  "description": "An API RESTFul that serves users data and tickets bought by them.",
   "main": "src/app.js",
   "scripts": {
     "dev": "nodemon",
     "style": "eslint --init",
-    "test": "tape ./src/tests/app.test.js | tap-spec"
+    "test": "tape ./src/tests/app.test.js | tap-spec",
+    "ingr": "node ./src/app.js"
   },
-  "keywords": [],
+  "keywords": [
+    "node.js",
+    "javascript",
+    "express",
+    "tickets",
+    "api",
+    "restful"
+  ],
   "author": "Cleiton Dantas",
   "license": "ISC",
   "devDependencies": {
