@@ -99,20 +99,22 @@ test('========== DELETE api/v1/user/:id ==========', (t) => {
     .end((err, res) => {
       t.error(err, 'No error returned');
       t.assert(res.body.message === "Successfully deleted", "Deleted!");
+      t.end();
     });
-  
+});
+
+test('======== Trying GET the same data =========', (t) => {
   supertest(app)
     .get(`/api/v1/user/${idUser}`)
     .expect(200)
     .end((err, res) => {
-      t.comment("Trying get any field: ");
       t.error(err, 'No error returned');
       t.assert(res.body.name === undefined, 'Name not found!');
       t.assert(res.body.idade === undefined, 'Age not found!');
       t.assert(res.body.email === undefined, 'Email not found!');
       t.end();
     });
-});
+})
 
 test('Disconnect database:', (t) => {
   mongoose.connection.close(() => {
