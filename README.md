@@ -74,16 +74,10 @@ Example:
     "email": "elon@tesla.com"
 }
 ```
-##### [Delete] By an user id
+##### [DELETE] By an user id
 ``http://localhost:7000/api/v1/user/:id``
 
-#### Tickets ``api/v1/ticket/``
-
-##### [GET] All tickets:
-``http://localhost:7000/api/v1/ticket/``
-##### [GET] Get a ticket by id:
-``http://localhost:7000/api/v1/ticket/:id``
-##### [POST] Insert a ticket by given user Id:
+##### [PUT] Insert a ticket by given user Id:
 
 ``http://localhost:7000/api/v1/ticket/:id``
 
@@ -96,6 +90,14 @@ Example:
   "price": <float>
 }
 ````
+
+#### TICKETS ``api/v1/ticket/``
+
+##### [GET] All tickets:
+``http://localhost:7000/api/v1/ticket/``
+##### [GET] Get a ticket by id:
+``http://localhost:7000/api/v1/user/ticket/:id``
+
 ##### [DELETE] By a ticket id:
 ``http://localhost:7000/api/v1/ticket/:id``
 
