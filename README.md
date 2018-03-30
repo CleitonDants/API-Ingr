@@ -36,10 +36,19 @@ Using Airbnb style code.
 - GET, PUT and DELETE ticket by ID
 
 ## Installation
+Required NPM version 5.6.0. NPM has some unexpected bugs with the lastest versions. 
 
+````
     npm install
     npm run ingr
-    
+````
+
+To develop (init nodemon):
+````
+  npm install
+  npm run dev
+````
+
 ## API Reference
 #### By [Postman](https://www.getpostman.com/):
 The port may variate.
