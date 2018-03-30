@@ -36,7 +36,7 @@ Using Airbnb style code.
 - GET, PUT and DELETE ticket by ID
 
 ## Installation
-#### Required: 
+#### Recommended: 
 - MongoDB v3.6.3 or later.
 - Node v9.2.0 or later.
 - NPM version 5.6.0. NPM has some unexpected bugs with the lastest versions. 
