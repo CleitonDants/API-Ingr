@@ -39,8 +39,8 @@ Using Airbnb style code.
 Required NPM version 5.6.0. NPM has some unexpected bugs with the lastest versions. 
 
 ````
-    npm install
-    npm run ingr
+  npm install
+  npm run ingr
 ````
 
 To develop (init nodemon):
@@ -79,8 +79,8 @@ Example:
 ```
 {
 	"name": "Elon Musk",
-    "age": 46,
-    "email": "elon@tesla.com"
+  "age": 46,
+  "email": "elon@tesla.com"
 }
 ```
 ##### [DELETE] By an user id
