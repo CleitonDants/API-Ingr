@@ -43,7 +43,7 @@ Required NPM version 5.6.0. NPM has some unexpected bugs with the lastest versio
   npm run ingr
 ````
 
-To develop (init nodemon):
+To developing (init nodemon):
 ````
   npm install
   npm run dev
