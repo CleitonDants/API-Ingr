@@ -81,9 +81,9 @@ All fields are **required** excepts "tickets".
 Example:
 ```
 {
-  "name": "Elon Musk",
-  "age": 46,
-  "email": "elon@tesla.com"
+  "name": "Cleiton Dantas",
+  "age": 20,
+  "email": "cleitondantasdeoliveira@hotmail.com"
 }
 ```
 ##### [DELETE] By an user id
